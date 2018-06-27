@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Linking, TouchableNativeFeedback,Image} from 'react-native';
-import { Container, Header, Content, Card, CardItem, Body, Text } from 'native-base';
+import { Container, Header, Content, Card, CardItem, Body, Text,
+  Left, Right
+ } from 'native-base';
 import moment from 'moment';
 
 export default class Article extends React.Component {
@@ -13,30 +15,35 @@ export default class Article extends React.Component {
       urlToImage,
       url
     } = this.props.article;
-    
+
     const time = moment(publishedAt || moment.now()).fromNow();
     return (
-      <Container>
-        <Content>
-          <Card style={{paddingBottom:0}}>
-          <TouchableNativeFeedback
-        useForeground
-        onPress={() => Linking.openURL(url)}>
+      <View style={{paddingBottom:0}}>
+        <TouchableNativeFeedback
+          useForeground
+          onPress={() => Linking.openURL(url)}>
+          <Card>
             <CardItem>
-            <Body>
-            <Text>
+              <Body>
+                <Text>
                    {title}
                 </Text>
-              <Image source={{uri:urlToImage}} style={{width:400,height:200}}/>
-              <Text>{source.name.toUpperCase()}</Text>
-            <Text>{time}</Text>
-            </Body>
+              </Body>
             </CardItem>
-            </TouchableNativeFeedback>
+            <CardItem cardBody>
+              <Image source={{uri:urlToImage}} style={{width:400,height:200}}/>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Text>{source.name.toUpperCase()}</Text>
+              </Body>
+              <Right>
+                <Text note>{time}</Text>
+              </Right>
+            </CardItem>
           </Card>
-        </Content>
-        </Container>
-       
+        </TouchableNativeFeedback>
+      </View>
     );
   }
 }
