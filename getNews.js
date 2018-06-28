@@ -1,3 +1,7 @@
+// here we creating a function in charge of making a request to our api
+//we're using fetch which makes an http request to our api and using
+// a promise to get the reponse
+//https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 
 export async function getNews() {
   let result =

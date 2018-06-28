@@ -1,3 +1,8 @@
+/*the article component is simply
+  card component (from native-base) wrapped in a
+  TouchableNativeFeedback with some props from the FlatList
+*/
+
 import React from 'react';
 import { View, Linking, TouchableNativeFeedback,Image} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Body, Text,

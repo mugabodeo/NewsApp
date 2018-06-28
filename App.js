@@ -35,28 +35,46 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 
-// Import getNews from news.js
+//importing getNews function which is in charge of making
+//a request to our api and returning some data.
 import { getNews } from './getNews';
-import Article from './Article';
+
+import Article from './Article';//article component
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+
+    //in our state we'll have an array of articles we want
+    //to show, empty at the start and refreshing which is
+    //prop of our flatlist
     this.state = { articles: [], refreshing: true };
     this.fetchNews = this.fetchNews.bind(this);
   }
 
   componentDidMount() {
+    //componentDidMount is a component lifecycle method
+    //put here some code that you want to be executed
+    //after the component has rendered, showing on the UI
+    //in our case we're fetching the news articles from the api
+    //cause we want a list of some articles to be showing as
+    //fetch more or ask more the api
     this.fetchNews();
   }
 
   fetchNews() {
+    //using getNews function which returns a promise containing
+    //an array of articles we update our articles array in the state
+    //and refreshing
     getNews()
       .then(articles => this.setState({ articles, refreshing: false }))
       .catch(() => this.setState({ refreshing: false }));
   }
 
   handleRefresh() {
+    //this one is called when you scroll the list from the top of it
+    //mainly to see if there some more articles and start fetching
+    //again
     this.setState(
       {
         refreshing: true
@@ -66,6 +84,10 @@ export default class App extends React.Component {
   }
 
   render() {
+    //in renderItem we're going to return the article component,
+    //cause we're making a list of article components with an
+    //article prop which is an object containing a title,
+    //an image ...
     return (
       <FlatList
         data={this.state.articles}
